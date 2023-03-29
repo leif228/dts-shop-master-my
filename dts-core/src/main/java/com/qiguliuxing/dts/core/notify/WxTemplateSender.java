@@ -3,6 +3,7 @@ package com.qiguliuxing.dts.core.notify;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.binarywang.wx.miniapp.bean.WxMaUniformMessage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import com.qiguliuxing.dts.db.service.DtsUserFormIdService;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaTemplateData;
-import cn.binarywang.wx.miniapp.bean.WxMaTemplateMessage;
 
 /**
  * 微信模版消息通知
@@ -62,17 +62,17 @@ public class WxTemplateSender {
 		if (userFormid == null)
 			return;
 
-		WxMaTemplateMessage msg = new WxMaTemplateMessage();
+		WxMaUniformMessage msg = new WxMaUniformMessage();
 		msg.setTemplateId(templatId);
 		msg.setToUser(touser);
 		msg.setFormId(userFormid.getFormid());
 		msg.setPage(page);
-		msg.setColor(color);
+//		msg.setColor(color);
 		msg.setEmphasisKeyword(emphasisKeyword);
 		msg.setData(createMsgData(parms));
 
 		try {
-			wxMaService.getMsgService().sendTemplateMsg(msg);
+			wxMaService.getMsgService().sendUniformMsg(msg);
 			if (formIdService.updateUserFormId(userFormid) == 0) {
 				logger.warn("更新数据已失效");
 			}

@@ -280,6 +280,7 @@ public class WxAuthController {
 			return WxResponseUtil.fail(AUTH_CAPTCHA_FREQUENCY);
 		}
 
+		logger.info("请求验证码:{}",code);
 		logger.info("【请求结束】请求验证码成功");
 		return ResponseUtil.ok();
 	}

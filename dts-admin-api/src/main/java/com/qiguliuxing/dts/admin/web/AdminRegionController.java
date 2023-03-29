@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.validation.constraints.NotNull;
 
+import com.qiguliuxing.dts.admin.annotation.RequiresPermissionsDesc;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +33,15 @@ public class AdminRegionController {
 
 	@Autowired
 	private DtsRegionService regionService;
-
+	@RequiresPermissions("admin:region:clist")
+	@RequiresPermissionsDesc(menu = { "商场管理", "行政区域" }, button = "查询")
 	@GetMapping("/clist")
 	public Object clist(@NotNull Integer id) {
 		List<DtsRegion> regionList = regionService.queryByPid(id);
 		return ResponseUtil.ok(regionList);
 	}
-
+	@RequiresPermissions("admin:region:list")
+	@RequiresPermissionsDesc(menu = { "商场管理", "行政区域" }, button = "列表")
 	@GetMapping("/list")
 	public Object list(String name, Integer code, @RequestParam(defaultValue = "1") Integer page,
 			@RequestParam(defaultValue = "10") Integer limit,

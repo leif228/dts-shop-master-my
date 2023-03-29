@@ -168,6 +168,7 @@ export const asyncRouterMap = [
         component: () => import('@/views/mall/region'),
         name: 'region',
         meta: {
+          perms: ['GET /admin/region/clist', 'GET /admin/region/list'],
           title: '行政区域',
           noCache: true
         }
@@ -421,7 +422,7 @@ export const asyncRouterMap = [
         component: () => import('@/views/sys/os'),
         name: 'os',
         meta: {
-          perms: ['GET /admin/os/list', 'POST /admin/os/create', 'POST /admin/os/update', 'POST /admin/os/delete'],
+          perms: ['GET /admin/storage/list', 'POST /admin/storage/create', 'POST /admin/storage/update', 'POST /admin/storage/delete'],
           title: '对象存储',
           noCache: true
         }
